@@ -1,26 +1,106 @@
-[
-    {
-        "id": 1,
-        "titulo": "Dune",
-        "imagen": "dune.jpg",
-        "genero": "Aventura",
-        "sinopsis": "Un joven emprende una misión para salvar su mundo.",
-        "trailer": "https://www.youtube.com/embed/mSY_NbSmaUI"
-    },
-    {
-        "id": 2,
-        "titulo": "50 primeras citas",
-        "imagen": "50-primeras-citas.jpg",
-        "genero": "Comedia",
-        "sinopsis": "Henry se enamora de Lucy, una mujer con pérdida de memoria a corto plazo.",
-        "trailer": "https://www.youtube.com/embed/17KJk3ErIx0"
-    },
-    {
-        "id": 3,
-        "titulo": "Batman Caballero de la Noche",
-        "imagen": "batman-caballero-de-la-noche.webp",
-        "genero": "Acción",
-        "sinopsis": "La película comienza con el violento robo de uno de los bancos de la mafia por una banda de payasos.",
-        "trailer": "https://www.youtube.com/embed/dzQtWkpc2-c"
-    }
-]
+    [
+        {
+            "id": 1,
+            "titulo": "F1: La Pelicula",
+            "generos": ["Accion", "Drama" ,"Aventura" , "Deportes"],
+            "imagen": "img/formula1.jpg",
+            "sinopsis": "Sonny Hayes era el fenómeno más prometedor de la Formula 1 en los años 90 hasta que sufrió un accidente en la pista. Treinta años después, su excompañero, Ruben Cervantes, lo convence de volver para correr junto al talentoso novato Joshua Pearce.",
+            "trailer": "https://www.youtube.com/watch?v=mizQBIpMrbE",
+            "estreno": "2025-06-25",
+            "precios": {
+                "estreno": 7.50,
+                "normal": 4.00
+            }          
+        },
+        {
+            "id": 2,
+            "titulo": "Gran Turismo",
+            "generos": ["Accion", "Drama"],
+            "imagen": "img/gran_turismo.jpg",
+            "sinopsis": "Basada en una historia real, la película narra cómo un adolescente, Jann Mardenborough, apasionado por el videojuego Gran Turismo, logra convertir su habilidad virtual en una oportunidad real. Gana una serie de competiciones patrocinadas por Nissan, lo que le sirve de trampolín para entrar en una academia de pilotos y, finalmente, convertirse en un piloto de carreras profesional.",
+            "trailer": "https://www.youtube.com/watch?v=f5IRCGKZgJY",
+            "estreno": "2023-08-11",
+            "precios": {
+                "estreno": 6.00,
+                "normal": 3.50
+            }
+        },
+        {
+            "id": 3,
+            "titulo": "Blanca Nieves",
+            "generos": ["Fantasia", "Aventura"],
+            "imagen": "img/blanca_nieves.jpeg",
+            "sinopsis": "Una adaptación en acción real del clásico cuento de hadas. Una hermosa joven princesa es acosada por su madrastra, la Reina Malvada. Ella escapa del palacio y busca refugio en el bosque, uniéndose a un grupo de siete compañeros. Esta nueva versión busca reinterpretar el clásico, con Blanca Nieves evolucionando de una figura pasiva a una heroína que busca empoderarse como líder para enfrentarse a la Reina y liberar su reino.",
+            "trailer": "https://www.youtube.com/watch?v=BE0BwFSYXOQ",
+            "estreno": "2025-03-20",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        },
+        {
+            "id": 4,
+            "titulo": "Pacific Rim",
+            "generos": ["Ciencia Ficcion", "Accion"],
+            "imagen": "img/pacific_rim.jpg",
+            "sinopsis": "Cuando legiones de monstruos gigantescos, llamados Kaijus, emergen de un portal interdimensional en las profundidades del Océano Pacífico (La Brecha), una guerra que consume los recursos de la humanidad se desata. Para combatirlos, se crean los Jaegers, robots colosales controlados simultáneamente por dos pilotos unidos por un puente neuronal. A punto de caer, la humanidad deposita su última esperanza en dos improbables héroes, un expiloto (Raleigh Becket) y una aprendiz, que deben conducir un Jaeger legendario, aunque obsoleto, para enfrentarse al inminente Apocalipsis.",
+            "trailer": "https://www.youtube.com/watch?v=4NCG8bp4BI0",
+            "estreno": "2013-08-09",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        },
+        {
+            "id": 5,
+            "titulo": "Rapidos y Furioso 5",
+            "generos": ["Accion", "Crimen"],
+            "imagen": "img/rapidosyfu_5.jpg",
+            "sinopsis": "Desde que Brian O'Conner y Mia Toretto ayudaron a Dominic Toretto a escapar de la custodia, han cruzado muchas fronteras para evadir a las autoridades. Acorralados en Río de Janeiro, no tienen otra opción que ejecutar un último y arriesgado golpe por valor de $100 millones para conseguir su libertad. Para ello, reúnen a un equipo de élite con viejos amigos de la saga. Sin embargo, no solo el empresario corrupto que quieren robar les sigue la pista, sino también el implacable agente federal Luke Hobbs (Dwayne Johnson), quien llega a Brasil con su equipo para cazarlos.",
+            "trailer": "https://www.youtube.com/watch?v=uBmnUB4TOWQ",
+            "estreno": "2011-04-29",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        },
+        {
+            "id": 6,
+            "titulo": "Alicia en el País de las Maravillas",
+            "generos": ["Fantasia", "Aventura"],
+            "imagen": "img/alicia.jpg",
+            "sinopsis": "Una Alicia de 19 años regresa accidentalmente al mágico mundo de Infratierra (Underland), que visitó de niña pero del que no tiene recuerdos. Allí se reencuentra con sus extravagantes amigos, como el Sombrerero Loco y el Conejo Blanco. Alicia descubre que es la única persona que puede cumplir la profecía para acabar con el tiránico reinado de terror de la malvada Reina Roja, derrotando al monstruoso Jabberwocky.",
+            "trailer": "https://www.youtube.com/watch?v=mUHSNPfNkIs",
+            "estreno": "2010-03-05",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        },
+        {
+            "id": 7,
+            "titulo": "El Conjuro",
+            "generos": ["Terror", "Suspenso"],
+            "imagen": "img/conjuro.jpg",
+            "sinopsis": "Basada en un caso real documentado por los famosos demonólogos Ed y Lorraine Warren (interpretados por Patrick Wilson y Vera Farmiga, respectivamente). La historia se ambienta en 1971 y sigue a la familia Perron, que se muda a una aislada casa de campo en Rhode Island. Rápidamente, la familia comienza a experimentar aterradores fenómenos sobrenaturales, forzando a los Warren a intervenir en lo que se convierte en uno de los casos más oscuros y terroríficos de sus carreras.",
+            "trailer": "https://www.youtube.com/watch?v=ceVrp8fXorM",
+            "estreno": "2013-07-19",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        },
+        {
+            "id": 8,
+            "titulo": "Destino Final: Lazos de Sangre",
+            "generos": ["Terror", "Sobrenatural"],
+            "imagen": "img/destino.jpg",
+            "sinopsis": "La Muerte regresa, pero esta vez persigue a los descendientes de aquellos que lograron evitar su destino fatal décadas atrás. Una joven, Stefani, comienza a tener premoniciones y descubre que la maldición se extiende por su línea de sangre. Ella y su familia deben luchar para sobrevivir mientras la Muerte intenta corregir un desequilibrio que comenzó con su abuela.",
+            "trailer": "https://www.youtube.com/watch?v=jO0pT3Q4Rms",
+            "estreno": "2025-04-16",
+            "precios": {
+                "estreno": 8.00,
+                "normal": 4.50
+            }
+        }
+    ]
