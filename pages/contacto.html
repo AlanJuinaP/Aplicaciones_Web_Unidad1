@@ -5,25 +5,35 @@
     <title>Contacto - CinePlus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">CinePlus</a>
+        </div>
+    </nav>
+
     <div class="container py-5">
         <h2 class="mb-4">Contáctanos</h2>
+        <div id="alerta" class="alert alert-success d-none">Mensaje enviado con exito.</div>
         <form id="form-contacto" novalidate>
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required> 
+                <input type="text" class="form-control" id="nombre" required>
+                <div class="invalid-feedback">Por favor ingresa tu nombre.</div> 
             </div>
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo electrónico</label>
                 <input type="email" class="form-control" id="correo" required>
+                <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
             </div>
             <div class="mb-3">
                 <label for="mensaje" class="form-label">Mensaje</label>
                 <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+                <div id="mensajeFeedback" class="invalid-feedback">El mensaje debe tener entre 20 y 50 caracteres.</div>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-            <div id="alerta" class="alert alert-success mt-3 d-none">Mensaje enviado con exito</div>
+            <button class="btn btn-primary">Enviar</button>
         </form>
     </div>
 
@@ -31,11 +41,38 @@
     <script>
         $('#form-contacto').on('submit', function (e){
             e.preventDefault();
-            if (this.checkValidity()){
-                $('#alerta').removeClass('d-none').hide().fadeIn();
-                setTimeout(() => $('#alerta').fadeOut(), 3000);
-                this.reset();
+            const form = this;
+            const nombre = $('#nombre').val().trim();
+            const correo = $('#correo').val().trim();
+            const mensaje = $('#mensaje').val().trim();
+
+            let ok = true;
+
+            if (!nombre) {
+                $('#nombre').addClass('is-invalid');
+                ok = false;
+            }else { $('#nombre').removeClass('is-invalid');}
+
+            //simple email regex
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(correo)) {
+                $('#correo').addClass('is-invalid');
+                ok = false;
+            } else { $('#correo').removeClass('is-invalid');}
+
+            if (mensaje.length < 20 || mensaje.length > 50) {
+                $('#mensaje').addClass('is-invalid');
+                ok = false;
+            }else { $('#mensaje').removeClass('is-invalid');}
+
+            if (!ok) {
+                return;
             }
+
+            //show success
+            $('#alerta').removeClass('d-none').hide().fadeIn();
+            setTimeout(() => $('#alerta').fadeOut(), 3000);
+            form.reset();
         });
     </script>
 </body>

@@ -1,7 +1,45 @@
-body {
-    background-color: #f8f9fa;
+/* style.css - tema basico personalizado*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+:root{
+    --primary:#0d6eefd;
+    --bg:#0f1720;
 }
-.card img {
-    height: 250px;
-    object-fit: cover;
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f6f7fb;
+    min-height: 100vh;
+    display: felx;
+    flex-direction: column;
+}
+
+main{ flex:1 0 auto;}
+
+.card-movie {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card-movie:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(20, 20, 20, 0.12);
+}
+
+footer {
+    /* asegurar que el footer quede al fondo si la pagina es corta */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Bagde estreno */
+.badge-estreno{
+    background: linear-gradient(90deg, #ff6b6b,#ffb86b);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* small responsive tweaks */
+@media (max-width:576px){
+    .card .card-img-top{ height: 200px; object-fit: cover;}
 }

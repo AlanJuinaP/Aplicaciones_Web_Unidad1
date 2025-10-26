@@ -14,47 +14,111 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (peliculas) {
-        const pelicula = peliculas.find(p => p.id == idPelicula);
-            if (pelicula) {
-            mostrarDetalle(pelicula);
-            } else {
-            $("#detalle-pelicula").html("<p>Película no encontrada.</p>");
+            const p = peliculas.find(x => String(x.id) === String(idPelicula));
+            if (!p) {
+                $("#detalle-pelicula").html("<p>Pelicula no encontrada.</p>");
+                return;
+            }
+
+            mostrarDetalle(p);
+            cargarResenas(p.id);
+        },
+        error: function(){
+            $("#detalle-pelicula").html("<p>Error al cargar el detalle.</p>");
         }
-    },
-        error: function () {
-        $("#detalle-pelicula").html("<p>Error al cargar los datos.</p>");
-        }
+        
     });
+
+    //Mostar detalle de pelicula
+    function mostrarDetalle(p){
+        const hoy = new Date();
+        const estrenoDate = new Date(p.estreno);
+        const diff = (hoy - estrenoDate) / (1000 * 60 * 60 * 24);
+        let precio;
+        let badge = "";
+
+        if (diff >= 0 && diff <= 14){
+            precio = p.precios.estreno;
+            badge = `<span class="badge badge-estreno">ESTRENO</span>`;
+        } else if (estrenoDate > hoy) {
+            precio = p.precios.estreno;
+            badge = `<span class="badge bg-info">PRÓXIMO ESTRENO</span>`;
+        } else {
+            precio = p.precios.normal;
+            badge = `<span class="badge bg-secondary">EN CARTELERA</span>`;
+        }
+
+        const detalleHTML = `
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="../${p.imagen}" class="img-fluid rounded-start" alt="${p.titulo}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">${p.titulo}</h2>
+                            <p>${badge}</p>
+                            <p><strong>Géneros:</strong> ${p.generos.join(", ")}</p>
+                            <p><strong>Estreno:</strong> ${new Date(p.estreno).toLocaleDateString()}</p>
+                            <p class="text-muted"><strong>Precio actual:</strong> $${precio.toFixed(2)}</p>
+                            <p class="mt-3">${p.sinopsis}</p>
+                            <a href="${p.trailer}" target="_blank" class="btn btn-outline-primary mt-3">Ver Tráiler</a>
+                            <a href="../index.html" class="btn btn-secondary mt-3">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        $("#detalle-pelicula").html(detalleHTML);
+    }
+
+    //Cargar reseñas desde resena.json
+    function cargarResenas(peliculaId){
+        $.ajax({
+            url: "../data/reseñas.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                const resenaData = data.find(r => String(r.peliculaId) === String(peliculaId));
+                if (!resenaData || resenaData.resenas.length === 0) {
+                    $("#lista-reseñas").html("<p class='text-muted'>No hay reseñas para esta película.</p>");
+                    return;
+                }
+
+                mostrarResenas(resenaData.resenas);
+            },
+            error: function () {
+                $("#lista-reseñas").html("<p class='text-danger'>Error al cargar las reseñas.</p>");
+            }
+        });
+    }
+
+    //mostrar resenas con estrellas
+    function mostrarResenas(resenas){
+        let html = "";
+        resenas.forEach(r => {
+            const estrellas = generarEstrellas(r.puntuacion);
+            html += `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title mb-1">${r.usuario}</h6>
+                        <div class="text-warning mb-2">${estrellas}</div>
+                        <p class="card-text">${r.comentario}</p>
+                    </div>
+                </div>`;
+        });
+        $("lista-resenas").html(html);
+    }
+
+    //generar Html de estrellas
+    function generarEstrellas(puntuacion){
+        let estrellasHTML = "";
+        for(let i = 1; i <= 5; i++){
+            if (i <= puntuacion) {
+                estrellasHTML += "&#9733; ";//estrella llena
+            }else {
+                estrellasHTML += "&#9734; "// estrella vacia
+            }
+        }
+        return estrellasHTML;
+    }
 });
-
-    // Función que genera el detalle dinámico
-    function mostrarDetalle(p) {
-    const hoy = new Date();
-    const fechaEstreno = new Date(p.estreno);
-    const esEstreno = hoy < fechaEstreno;
-    const precio = esEstreno ? p.precios.estreno : p.precios.normal;
-
-    const badge = esEstreno
-        ? `<span class="badge bg-danger fs-6">🎉 Estreno</span>`
-        : `<span class="badge bg-success fs-6">🎟️ En Cartelera</span>`;
-
-    const detalleHTML = `
-        <div class="col-md-8">
-            <div class="card shadow">
-            <img src="../${p.imagen}" class="card-img-top" alt="${p.titulo}">
-            <div class="card-body">
-            <h2 class="card-title">${p.titulo}</h2>
-            <p>${badge}</p>
-            <p><strong>Géneros:</strong> ${p.generos.join(", ")}</p>
-            <p><strong>Estreno:</strong> ${new Date(p.estreno).toLocaleDateString()}</p>
-            <p class="text-muted"><strong>Precio actual:</strong> $${precio.toFixed(2)}</p>
-            <p class="mt-3">${p.sinopsis}</p>
-            <a href="${p.trailer}" target="_blank" class="btn btn-outline-primary mt-3">Ver Tráiler 🎥</a>
-            <a href="../index.html" class="btn btn-secondary mt-3">Volver</a>
-            </div>
-        </div>
-    </div>
-    `;
-
-    $("#detalle-pelicula").html(detalleHTML);
-}

@@ -1,45 +1,122 @@
 $(document).ready(function (){
-    $.ajax({
-        url: "data/peliulas.json",
-        method: "GET",
-        dataType: "json",
-        success: function (peliulas){
-            mostrarPeliculas(peliulas);
-        },
-        error: function (xhr, status, error){
-            console.error("Error al cargar las peliculas:",error);
-            
-            
-        }
-    });
-}); 
 
-//fundion para mostrar las peliculas en la galeria 
-function mostrarPeliculas(peliculas){
-    const contenedor = $("#lista-peliculas");
-    contenedor.empty();
+    //mostrar welcome alert solo una vez
+    if (!localStorage.getItem('cineplus_welcome_shown')) {
+        const welcomeHtml = `
+        <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
+            <stong>Bienvenido a CinePlus!</stong> Explora las peliculas en cartelera.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>`;
+        $('#welcome-alert-container').html(welcomeHtml);
+        localStorage.setItem('cineplus_welcome_shown','1');
+    }
+    //Mostar spinner y luego cargar
+    $('#spinner-container').show();
+    setTimeout(loadPeliculas, 5000);
 
-    const hoy = new Date();
-    
-    peliculas.forEach((peli) =>{
-        const fechaEstreno = new Date(peli.estreno);
-        const esEstreno = hoy < fechaEstreno;
-        const precio = esEstreno ? peli.precios.estreno : peli.precios.normal;
+    function loadPeliculas(){
+        $.ajax({
+            url: "data/peliulas.json",
+            method: "GET",
+            dataType: "json",
+            success: function (peliculas){
+                $('#spinner-container').hide();
+                mostrarPeliculas(peliculas);
+            },
+            error: function (xhr, status, error){
+                $('#spinner-container').hide();
+                console.error("Error al cargar las peliculas:",error);
+                $('#alert-carga').html(`<div class="alert alert-danger">Error al cargar las películas. Revise la consola.</div>`);
+            }
+        });
+    }
 
-        const tarjeta = `
-            <div class = "col-md-4 mb-4">
-                <div> class="card h-100 shadow-sm>
-                    <img src="${peli.imagen}" class="card-img-top" alt=${peli.titulo}">
-                    <div class="card-body">
-                        <h5 class="card-tittle">${peli.titulo}</h5>
-                        <p class="text-muted"><strong>Precio:</strong> $${precio.toFixed(2)}</p>
-                        <p>${peli.sinopsis.substring(0, 100)}...</p>
-                        <a href="pages/detalle.html?id=${peli.id}" class="btn btn-primary">Ver Detalle</a>
+    //calcula si es estreno comparando fecha de estreno con fecha actual
+    function esEstreno(estrenoISO){
+        const hoy = new Date();
+        const estreno = new Date(esEstreno);
+        return estreno > hoy;
+    }
+
+    //Muestra tarjetas
+    function mostrarPeliculas(peliculas){
+        const $lista = $('#alista-peliculas');
+        $lista.empty();
+
+        peliculas.forEach(p => {
+            //precio actual segun fecha
+            const hoy = new Date();
+            const estrenoDate = new Date(p.estreno);
+            let precio;
+            let badgeHTML = '';
+
+            const diff = (hoy - estrenoDate) / (1000*60*60*24);
+            if (diff >= 0 && diff <= 14) {
+                //estreno reciente (14 dias)
+                precio = p.precios.estreno;
+                badgeHTML = `<span class="badge badge-estreno">ESTRENO</span>`;
+            }else if(estrenoDate > hoy){
+                //aun no se estrena
+                precio = p.precios.estreno;
+                badgeHTML = `<span class="badge bg-info">PRÓXIMO ESTRENO</span>`;
+            }else{
+                //normal
+                precio = p.precios.normal;
+                badgeHTML = `<span class="badge bg-secondary">EN CARTELERA</span>`;
+            }
+
+            const  card = `
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card card-movie h-100">
+                    <img src="${p.imagen}" class="card-img-top" alt="${p.titulo}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${p.titulo}</h5>
+                        <p class="mb-1">${badgeHTML}</p>
+                        <p class="mb-2"><small class="text-muted">${p.generos.join(', ')}</small></p>
+                        <p class="mb-2 text-muted"><strong>Precio: </strong>$${precio.toFixed(2)}</p>
+                        <div class="mt-auto d-grid gap-2">
+                            <a href="pages/detalle.html?id=${p.id}" class="btn btn-outline-primary btn-sm">Ver detalle</a>
+                            <button class="btn btn-primary btn-sm btn-trailer" data-trailer="${p.trailer}" data-title="${p.titulo}">Ver tráiler</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            </div>`;
 
-        contenedor.append(tarjeta);
-    })
-}
+            const $card = $(card).hide();
+            $lista.append($card);
+            $card.fadeIn(600);
+        });
+
+        //manejar clic en ver trailer
+        $(document).on('click', '.btn-trailer', function(){
+            const trailerurl = $(this).data('trailer');
+            const title = $(this).data('title');
+            openTrailerModal(trailerurl, title);
+        });
+    }
+
+    function openTrailerModal(url, title){
+        //extraemos id de youtube si aplica y poner iframe, sino se abre el url en iframe
+        let embed = url;
+        
+        if (url.includes('youtube.com/watch')) {
+            const u =  new URL(url);
+            const v = u.searchParams.get('v');
+            if(v)embed= `https://www.youtube.com/embed/${v}?autoplay=1`;
+        }else if (url.includes('youtube.be/')) {
+            const v = url.split('/').pop();
+            embed = `https://www.youtube.com/embed/${v}?autoplay=1`;
+        }
+
+        $('#trailerModalTitle').text(title);
+        $('#trailerModalBody').html(`<iframe src="${embed}" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`);
+        const myModal = new bootstrap.Modal(document.getElementById('trailerModal'));
+        myModal.show();
+
+        // limpiar iframe al cerrar
+        $('#trailerModal').on('hidden.bs.modal', function () {
+            $('#trailerModalBody').html('');
+        });
+    }
+
+}); 

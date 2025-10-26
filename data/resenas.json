@@ -1,0 +1,83 @@
+[
+    {
+        "peliculaId": 1,
+        "reseñas": [
+            {
+                "usuario": "Domenika Cruz",
+                "comentario": "Una pelicula impresionante, los efectos visuales y la historia me mantuvieron pegada a la pantalla.",
+                "puntuacion": 5
+
+            },
+            {
+                "usuario": "Carlos Pérez",
+                "comentario": "Muy buena, aunque el final fue un poco predecible.",
+                "puntuacion": 4
+            },
+            {
+                "usuario": "Laura Torres",
+                "comentario": "El reparto fue excelente, definitivamente la volvería a ver.",
+                "puntuacion": 5
+            }
+        ]
+    },
+    {
+        "peliculaId": 2,
+        "reseñas": [
+            {
+                "usuario": "Andrés Morales",
+                "comentario": "La trama es original, pero el ritmo fue algo lento.",
+                "puntuacion": 3
+            },
+            {
+                "usuario": "Diana Vaca",
+                "comentario": "Excelente banda sonora y fotografía.",
+                "puntuacion": 4
+            }
+        ]
+    },
+    {
+        "peliculaId": 3,
+        "reseñas": [
+            {
+                "usuario": "Sofía Herrera",
+                "comentario": "Una historia conmovedora que te hace reflexionar.",
+                "puntuacion": 5
+            },
+            {
+                "usuario": "Felipe Rojas",
+                "comentario": "Buen mensaje, aunque algunas partes fueron lentas.",
+                "puntuacion": 4
+            }
+        ]
+    },
+    {
+        "peliculaId": 4,
+        "reseñas": [
+            {
+                "usuario": "Miguel Castro",
+                "comentario": "Mucho suspenso y buena dirección. Me encantó.",
+                "puntuacion": 5
+            },
+            {
+                "usuario": "Paola Jiménez",
+                "comentario": "El guion fue sólido y el final inesperado. Excelente trabajo.",
+                "puntuacion": 5
+            }
+        ]
+    },
+    {
+        "peliculaId": 5,
+        "reseñas": [
+            {
+                "usuario": "Elena Bravo",
+                "comentario": "Una película divertida para toda la familia, muy recomendada.",
+                "puntuacion": 4
+            },
+            {
+                "usuario": "José Cabrera",
+                "comentario": "Me reí bastante, aunque el humor fue algo infantil en partes.",
+                "puntuacion": 3
+            }
+        ]
+    }
+]
