@@ -6,11 +6,12 @@
     --bg:#0f1720;
 }
 
-body {
+html, body {
     font-family: 'Montserrat', sans-serif;
     background: #f6f7fb;
     min-height: 100vh;
-    display: felx;
+    height: 100%;
+    display: flex;
     flex-direction: column;
 }
 
@@ -27,6 +28,10 @@ main{ flex:1 0 auto;}
 
 footer {
     /* asegurar que el footer quede al fondo si la pagina es corta */
+    flex-shrink: 0;
+    background-color: #111;
+    color: #eee;
+    padding: 1rem 0;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -42,4 +47,27 @@ footer {
 /* small responsive tweaks */
 @media (max-width:576px){
     .card .card-img-top{ height: 200px; object-fit: cover;}
+}
+
+/* Animaciones */
+@keyframes fadeUp{
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-fade {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.nav-link.active{
+    color: #ffc107 !important;
+    font-weight: 600;
+    text-decoration: underline;
 }

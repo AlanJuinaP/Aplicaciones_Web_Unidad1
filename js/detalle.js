@@ -62,13 +62,47 @@ $(document).ready(function () {
                             <p><strong>Estreno:</strong> ${new Date(p.estreno).toLocaleDateString()}</p>
                             <p class="text-muted"><strong>Precio actual:</strong> $${precio.toFixed(2)}</p>
                             <p class="mt-3">${p.sinopsis}</p>
-                            <a href="${p.trailer}" target="_blank" class="btn btn-outline-primary mt-3">Ver Tráiler</a>
+                            <button class="btn btn-primary mt-3" id="btn-trailer" data-trailer="${p.titulo}">Ver Trailer</button>
                             <a href="../index.html" class="btn btn-secondary mt-3">Volver</a>
                         </div>
                     </div>
                 </div>
             </div>`;
         $("#detalle-pelicula").html(detalleHTML);
+
+        //Evento para abrir modal del trailer
+    $("#btn-trailer").on("click", function (){
+        const trailerUrl = $(this).data("trailer");
+        const titulo = $(this).data("titulo");
+        abrirModalTrailer(trailerUrl, titulo);
+    });
+    
+    }
+
+    //funcion para abrir el modal con el video embedido
+    function abrirModalTrailer(url, titulo){
+        let embed = url;
+
+        //convertir enlaces de youtube en formato embed(volvemos a implentar la funcion)
+        if (url.includes("youtube.com/watch")) {
+            const u = new URL(url);
+            const v = u.searchParams.get("v");
+            if (v) embed = `https://www.youtube.com/embed/${v}?autoplay=1`;
+        }else if (url.includes("youtu.be/")) {
+            const v = url.split("/").pop();
+            embed = `https://www.youtube.com/embed/${v}?autoplay=1`;
+        }
+
+        $("#modalTrailerLabel").text("trailer - " + titulo);
+        $("#trailer-container").html(`<iframe src="${embed}" allowfullscreen allow="autoplay; encrypted-media"></iframe>`);
+
+        const modal = new bootstrap.Modal(document.getElementById("modalTrailer"));
+        modal.show();
+
+        //limpiar iframe al cerrar modal
+        $("#modalTrailer").on("hidden.bs.modal", function() {
+            $("#trailer-container").html("");
+        });
     }
 
     //Cargar reseñas desde resena.json
@@ -113,11 +147,8 @@ $(document).ready(function () {
     function generarEstrellas(puntuacion){
         let estrellasHTML = "";
         for(let i = 1; i <= 5; i++){
-            if (i <= puntuacion) {
-                estrellasHTML += "&#9733; ";//estrella llena
-            }else {
-                estrellasHTML += "&#9734; "// estrella vacia
-            }
+            if (i <= puntuacion) estrellasHTML += "&#9733; ";//estrella llena
+            else estrellasHTML += "&#9734; ";// estrella vacia
         }
         return estrellasHTML;
     }
