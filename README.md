@@ -7,7 +7,26 @@
 **Fecha:** 26 de Octubre 2025  
 
 ---------
-## Descripccion del proyecto
+
+## ADEVERTENCIA ##
+Al abrir el archivo index.html directamente desde el explorador de archivos (ruta que empieza con file:///), las películas no se cargan y aparece el mensaje “Cargando películas…”.
+Esto sucede porque los navegadores bloquean las solicitudes AJAX locales por motivos de seguridad (CORS).
+
+Solución:
+Debes ejecutar el proyecto desde un servidor local o con Live Server para que las solicitudes AJAX funcionen correctamente.
+
+Opción 1: Usar Live Server
+Abre la carpeta del proyecto en Visual Studio Code.
+Instala la extensión llamada Live Server (de Ritwick Dey).
+Haz clic derecho sobre el archivo index.html y selecciona “Open with Live Server”.
+
+El navegador se abrirá automáticamente con una dirección como:
+http://127.0.0.1:5500/index.html
+
+Ahora las películas y las imágenes se cargarán sin problemas.
+
+##
+
 ## Descripción del proyecto
 
 CinePlus es una aplicación web diseñada para simular vallas publicitarias de salas de cine.
