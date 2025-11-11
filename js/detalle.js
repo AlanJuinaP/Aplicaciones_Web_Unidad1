@@ -62,7 +62,7 @@ $(document).ready(function () {
                             <p><strong>Estreno:</strong> ${new Date(p.estreno).toLocaleDateString()}</p>
                             <p class="text-muted"><strong>Precio actual:</strong> $${precio.toFixed(2)}</p>
                             <p class="mt-3">${p.sinopsis}</p>
-                            <button class="btn btn-primary mt-3" id="btn-trailer" data-trailer="${p.titulo}">Ver Trailer</button>
+                            <button class="btn btn-primary mt-3" id="btn-trailer" data-trailer="${p.titulo}">Ver Trailer </button>
                             <a href="../index.html" class="btn btn-secondary mt-3">Volver</a>
                         </div>
                     </div>
@@ -108,20 +108,20 @@ $(document).ready(function () {
     //Cargar reseñas desde resena.json
     function cargarResenas(peliculaId){
         $.ajax({
-            url: "../data/reseñas.json",
+            url: "../data/resenas.json",
             type: "GET",
             dataType: "json",
             success: function (data) {
                 const resenaData = data.find(r => String(r.peliculaId) === String(peliculaId));
                 if (!resenaData || resenaData.resenas.length === 0) {
-                    $("#lista-reseñas").html("<p class='text-muted'>No hay reseñas para esta película.</p>");
+                    $("#lista-resenas").html("<p class='text-muted'>No hay reseñas para esta película.</p>");
                     return;
                 }
 
                 mostrarResenas(resenaData.resenas);
             },
             error: function () {
-                $("#lista-reseñas").html("<p class='text-danger'>Error al cargar las reseñas.</p>");
+                $("#lista-resenas").html("<p class='text-danger'>Error al cargar las reseñas.</p>");
             }
         });
     }

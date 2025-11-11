@@ -69,7 +69,7 @@
     <script>
         $(function(){
             //cargar peliculas para seleccionar
-            $.getJSON("data/peliculas.json", function(peliculas){
+            $.getJSON("../data/peliculas.json", function(peliculas){
                 const $sel = $('#peliculas');
                 peliculas.forEach(p => { $sel.append(`<option value="${p.id}" data-precio-estreno="${p.precios.estreno}" data-precio-normal="${p.precios.normal}">${p.titulo} (${p.generos.join(', ')})</option>`);
                 });
@@ -115,9 +115,9 @@
                     html += `<p class="text-end"><strong>Total a pagar: $${total.toFixed(2)}</strong></p>`;
 
                     $('#modal-body-resumen').html(html);
-                    const myModal = new bootstrap.Modal(document,getElementById('modalResumen'));
+                    const myModal = new bootstrap.Modal(document.getElementById('modalResumen'));
                     myModal.show();
-                    $('$form-renta')[0].reset();
+                    $('#form-renta')[0].reset();
                 });
             });
         });

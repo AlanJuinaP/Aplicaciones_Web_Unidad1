@@ -4,7 +4,7 @@
             "titulo": "F1: La Pelicula",
             "generos": ["Accion", "Drama" ,"Aventura" , "Deportes"],
             "imagen": "img/formula1.jpg",
-            "sinopsis": "Sonny Hayes era el fenómeno más prometedor de la Formula 1 en los años 90 hasta que sufrió un accidente en la pista. Treinta años después, su excompañero, Ruben Cervantes, lo convence de volver para correr junto al talentoso novato Joshua Pearce.",
+            "sinopsis": "Sonny Hayes era el fenómeno más prometedor de la Formula 1 en los años 90 hasta que sufrió un accidente en la pista. Treinta años después, su excompañero, Ruben Cervantes, lo convence de volver para correr junto al talentoso novato Joshua Pearce. ",
             "trailer": "https://www.youtube.com/watch?v=mizQBIpMrbE",
             "estreno": "2025-06-25",
             "precios": {

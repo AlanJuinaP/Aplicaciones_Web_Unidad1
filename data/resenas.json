@@ -1,7 +1,7 @@
 [
     {
         "peliculaId": 1,
-        "reseñas": [
+        "resenas": [
             {
                 "usuario": "Domenika Cruz",
                 "comentario": "Una pelicula impresionante, los efectos visuales y la historia me mantuvieron pegada a la pantalla.",
@@ -12,32 +12,12 @@
                 "usuario": "Carlos Pérez",
                 "comentario": "Muy buena, aunque el final fue un poco predecible.",
                 "puntuacion": 4
-            },
-            {
-                "usuario": "Laura Torres",
-                "comentario": "El reparto fue excelente, definitivamente la volvería a ver.",
-                "puntuacion": 5
-            }
-        ]
-    },
-    {
-        "peliculaId": 2,
-        "reseñas": [
-            {
-                "usuario": "Andrés Morales",
-                "comentario": "La trama es original, pero el ritmo fue algo lento.",
-                "puntuacion": 3
-            },
-            {
-                "usuario": "Diana Vaca",
-                "comentario": "Excelente banda sonora y fotografía.",
-                "puntuacion": 4
             }
         ]
     },
     {
         "peliculaId": 3,
-        "reseñas": [
+        "resenas": [
             {
                 "usuario": "Sofía Herrera",
                 "comentario": "Una historia conmovedora que te hace reflexionar.",
@@ -52,7 +32,7 @@
     },
     {
         "peliculaId": 4,
-        "reseñas": [
+        "resenas": [
             {
                 "usuario": "Miguel Castro",
                 "comentario": "Mucho suspenso y buena dirección. Me encantó.",
@@ -67,7 +47,7 @@
     },
     {
         "peliculaId": 5,
-        "reseñas": [
+        "resenas": [
             {
                 "usuario": "Elena Bravo",
                 "comentario": "Una película divertida para toda la familia, muy recomendada.",
